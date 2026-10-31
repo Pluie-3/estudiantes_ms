@@ -1,0 +1,127 @@
+### Hola mundo
+GET http://127.0.0.1:8000/
+
+### sumar
+POST http://127.0.0.1:8000/sumar
+Content-Type: application/json
+
+{
+    "numero1": 50,
+    "numero2": 135
+}
+
+### ------------------------- ESTUDIANTES -------------------------
+
+### Consultar todos los estudiantes
+GET http://127.0.0.1:8000/estudiantes
+
+### Consultar un estudiante
+GET http://127.0.0.1:8000/estudiantes/25
+
+### Registrar un estudiante
+POST http://127.0.0.1:8000/estudiantes
+Content-Type: application/json
+
+{
+    "codigo": "0147",
+    "nombre": "Manuel",
+    "email": "manuel@test.com"
+}
+
+### Modificar un estudiante
+PUT http://127.0.0.1:8000/estudiantes/25
+Content-Type: application/json
+
+{
+    "codigo": "007",
+    "nombre": "James Bond",
+    "email": "bond.james.bond@test.com"
+}
+
+### Borrar un estudiante
+DELETE http://127.0.0.1:8000/estudiantes/24
+
+### Prueba de error: estudiante que no existe (debe responder 404)
+GET http://127.0.0.1:8000/estudiantes/9999
+
+### Prueba de error: email invalido (debe responder 400)
+POST http://127.0.0.1:8000/estudiantes
+Content-Type: application/json
+
+{
+    "codigo": "0148",
+    "nombre": "Sin email valido",
+    "email": "esto-no-es-un-email"
+}
+
+### ------------------------- DOCENTES -------------------------
+
+### Consultar todos los docentes (una fila = un docente + una asignatura)
+GET http://127.0.0.1:8000/docentes
+
+### Consultar un docente por id de fila
+GET http://127.0.0.1:8000/docentes/1
+
+### CREAR un docente (o una nueva asignatura para un docente existente)
+POST http://127.0.0.1:8000/docentes
+Content-Type: application/json
+
+{
+    "codigo": 4444,
+    "nombre": "Maria",
+    "asignatura": "Bases de Datos"
+}
+
+### CREAR otra asignatura para el mismo docente (mismo codigo y nombre)
+POST http://127.0.0.1:8000/docentes
+Content-Type: application/json
+
+{
+    "codigo": 4444,
+    "nombre": "Maria",
+    "asignatura": "Redes"
+}
+
+### MODIFICAR una fila de docente (cambia la asignatura de la fila 5, por ejemplo)
+PUT http://127.0.0.1:8000/docentes/5
+Content-Type: application/json
+
+{
+    "codigo": 4444,
+    "nombre": "Maria",
+    "asignatura": "Bases de Datos II"
+}
+
+### ELIMINAR una fila de docente
+DELETE http://127.0.0.1:8000/docentes/6
+
+### FILTRAR por asignatura (coincidencia parcial). Los espacios se escriben como %20
+GET http://127.0.0.1:8000/docentes/asignatura/Prog
+
+### FILTRAR por asignatura exacta con espacio
+GET http://127.0.0.1:8000/docentes/asignatura/Prog.%20Avanzada
+
+### BUSCAR un docente por nombre y ver sus asignaturas
+GET http://127.0.0.1:8000/docentes/buscar/Pepe
+
+### BUSCAR un docente por codigo y ver sus asignaturas
+GET http://127.0.0.1:8000/docentes/buscar/1111
+
+### Prueba de error: asignatura repetida para el mismo docente (debe responder 409)
+POST http://127.0.0.1:8000/docentes
+Content-Type: application/json
+
+{
+    "codigo": 1111,
+    "nombre": "Pepe",
+    "asignatura": "Moviles"
+}
+
+### Prueba de error: datos incompletos (debe responder 400)
+POST http://127.0.0.1:8000/docentes
+Content-Type: application/json
+
+{
+    "codigo": 5555
+}
+
