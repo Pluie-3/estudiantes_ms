@@ -11,7 +11,6 @@ $app = AppFactory::create();
 
 $students_endpoints = require __DIR__.'/../app/Presentation/Routers/students_endpoints.php';
 $teachers_endpoints = require __DIR__.'/../app/Presentation/Routers/teachers_endpoints.php';
-$cors = require __DIR__.'/../app/Presentation/Middleware/cors.php';
 
 $app->get('/', function (Request $request, Response $response, $args) {
     $response->getBody()->write("Hello world!");
