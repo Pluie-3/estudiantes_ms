@@ -31,13 +31,4 @@ $app->post("/sumar", function (Request $request, Response $response, $args) {
 $students_endpoints($app);
 $teachers_endpoints($app);
 
-// Manejo de errores: si algo falla (ruta inexistente, error inesperado) se responde en JSON.
-// Se agrega ANTES que el CORS para que las respuestas de error tambien lleven las cabeceras CORS.
-// Con displayErrorDetails = true se ve el detalle del error (solo para desarrollo).
-$error_middleware = $app->addErrorMiddleware(true, true, true);
-$error_middleware->getDefaultErrorHandler()->forceContentType('application/json');
-
-// Politicas de CORS (ver "Configuracion de politicas de cors" del PDF)
-$cors($app);
-
 $app->run();
